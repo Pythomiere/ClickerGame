@@ -1,0 +1,43 @@
+void intro() {
+
+  introDraw();
+}
+
+void introDraw() {
+CHILL.play();
+  background(#5e6b5d);
+  textAlign(CENTER, CENTER);
+  fill(0);
+  textFont(pixel);
+  textSize(80);
+  text("The Clicker Game", 550, 200);
+
+  introReleased();
+  rectMode(CENTER);
+
+  rect(540, 450, 200, 100, 20);
+  fill(0);
+  textFont(pix);
+  textSize(45);
+  text("HITME!", 541, 448);
+}
+
+void introClicks() {
+  if (mouseX > 440 && mouseX < 640 && mouseY > 400 && mouseY < 500) {
+    mode = game;
+    lives = 3;
+    score = 0;
+  }
+}
+
+void introReleased() {
+  if (mouseX > 440 && mouseX < 640 && mouseY > 400 && mouseY < 500 && mode == intro) { 
+    TICK.play();
+    TICK.rewind();
+    strokeWeight(1); 
+    fill(#F2D073);
+  } else {
+    strokeWeight(2); 
+    fill(#EDBD37);
+  }
+}

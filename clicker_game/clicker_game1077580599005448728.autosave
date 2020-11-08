@@ -1,0 +1,70 @@
+import ddf.minim.*;
+import ddf.minim.analysis.*;
+import ddf.minim.effects.*;
+import ddf.minim.signals.*;
+import ddf.minim.spi.*;
+import ddf.minim.ugens.*;
+
+// mode framework
+int mode; 
+final int intro = 0; 
+final int game = 1;
+final int pause = 2; 
+final int gameover = 3;
+
+// target variables
+float x, y, d;
+float vx, vy; //target velocity'
+int score, lives;
+
+// sound variables
+Minim minim;
+AudioPlayer CHILL, THEME, COIN, BUMP, GAMEOVER, GAMESTART, TADA, TICK, DING;
+
+PFont pixel;
+PFont pix;
+
+void setup() {
+  size(1080, 675);
+  mode = intro;
+  textAlign(CENTER, CENTER);
+  rectMode(CENTER);
+  mode = intro;
+  // color initialization
+  x = random(d + 20, width - d - 20); 
+  y = random(d + 20, height - d - 20); 
+  d = 100;
+  vx = 2; 
+  vy = -2;
+  score = 0;
+  lives = 3; 
+  pixel = createFont("Pixel.ttf", 200);
+  pix = createFont("Pix.ttf", 200);
+
+
+  // minim
+  minim = new Minim(this);
+  THEME = minim.loadFile("looop.mp3");
+  COIN = minim.loadFile("boop.mp3");
+  BUMP = minim.loadFile("nope.mp3");
+  GAMEOVER = minim.loadFile("gameover.mp3");
+  GAMESTART = minim.loadFile("woosh.mp3");
+  TADA = minim.loadFile("tada.mp3");
+  TICK = minim.loadFile("tick.mp3");
+  DING = minim.loadFile("ding.mp3");
+  CHILL = minim.loadFile("Goat Chill.mp3");
+}
+
+void draw() {
+  if (mode == intro) {
+    intro();
+  } else if (mode == game) { 
+    game();
+  } else if (mode == pause) {
+    pause();
+  } else if (mode == gameover) {
+    gameover();
+  } else {
+    println("Error: Mode = " + mode);
+  }
+}
